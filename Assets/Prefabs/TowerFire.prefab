@@ -9899,7 +9899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modes: 1
-  bullet: {fileID: 4949938186401646097, guid: 6578261bca958954e8cef1c1dac7e553, type: 3}
+  bullet: {fileID: 4949938186401646097, guid: 677c9db903a262043be1ea585de79582, type: 3}
   gunBarrel: {fileID: 6344429897294604414}
   delayShot: 1
   canBeShot: 0
