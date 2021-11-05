@@ -25,7 +25,7 @@ public class EnemyMoviment : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1))
             {
-                Debug.Log("colidiu com inimigo");
+               
                 if (hit.transform.CompareTag("Enemy"))
                 {
                     toBeMoviment = false;
@@ -56,6 +56,11 @@ public class EnemyMoviment : MonoBehaviour
             toBeMoviment = false;
             enemy.towerToBite = other.gameObject.GetComponent<Tower>();
             enemy.toBeBite = true;
+        }
+        if (other.gameObject.tag == "End")
+        {
+            GameManager.instance.PauseGame();
+            GameManager.instance.GameOver();
         }
 
     }

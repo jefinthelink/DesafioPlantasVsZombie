@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] private TMP_Text text;
     public static Timer instance;
     [SerializeField]private float timeMatch = 40.0f;
     private float timeMatchAux;
@@ -14,14 +14,16 @@ public class Timer : MonoBehaviour
     }
     private void Update()
     {
-        
+        CountTime();
     }
     private void CountTime()
     {
         timeMatch -= Time.deltaTime;
+        text.text = timeMatch.ToString();
         if (timeMatch <= 0.0f)
         {
             GameManager.instance.PauseGame();
+            GameManager.instance.GameOver();
         }
     }
     private void SetValues()

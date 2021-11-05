@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Audio;
 public class Enemy : MonoBehaviour
 {
-
+     private AudioSource audioSource;
+    [SerializeField] private GameObject fire;
+    [SerializeField] private GameObject ice;
     [Header("tipo de inimigo")]
     [SerializeField] private ModesOfEnemy modes;
     [Header("valor em moedas")]
@@ -56,6 +58,9 @@ public class Enemy : MonoBehaviour
         lifeBar.gameObject.SetActive(false);
         material = transform.GetComponent<MeshRenderer>().material;
         normalcolor = material.color;
+        audioSource = transform.GetComponent<AudioSource>();
+        fire.SetActive(false);
+        ice.SetActive(false);
     }
     public void Bite(Tower tower_)
     {
@@ -66,29 +71,29 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            //efeito de ataque
+            audioSource.Play();
             if (modes == ModesOfEnemy.normal)
             {
                 tower_.TakeDAmege(normalDamage);
-                Debug.Log("dando a mordida");
+               
             }
             if (modes == ModesOfEnemy.explode)
             {
                 tower_.TakeDAmege(damageExplode);
-                Debug.Log("explodindo");
+                
                 Death();
             }
             if (modes == ModesOfEnemy.tank)
             {
                 tower_.TakeDAmege(normalDamage);
-                Debug.Log("dando a mordida tanque");
+               
             }
             if (modes == ModesOfEnemy.takeFire)
             {
                 tower_.TakeDAmege(damageFire);
                 tower_.SetFire();
 
-                Debug.Log("dando a mordida de fogo");
+                
             }
         }
     }
@@ -119,7 +124,6 @@ public class Enemy : MonoBehaviour
     private void Death()
     {
         GameManager.instance.coins += coinValue;
-        //colocar efeito de morte
         Destroy(this.gameObject);
     }
     public void SetFire()
@@ -127,7 +131,7 @@ public class Enemy : MonoBehaviour
         isFire = true;
         timeFire = timeFireAux;
         material.color = Color.red;
-        //startar particula de fogo
+        fire.SetActive(true);
     }
     public void SetIce()
     {
@@ -135,11 +139,11 @@ public class Enemy : MonoBehaviour
         timeIce = timeIceAux;
         enemyMoviment.speed = enemySpeedWithIce;
         material.color = Color.blue;
-        //setar particula de gelo
+        ice.SetActive(true);
     }
     private void endFire()
     {
-        //parar oarticula de fogo
+        fire.SetActive(false);
         material.color = normalcolor;
     }
     private void TakeFire()
@@ -184,10 +188,13 @@ public class Enemy : MonoBehaviour
     {
         enemyMoviment.speed = enemyMoviment.speedAux;
         material.color = normalcolor;
-    //parar particula de gelo
+        ice.SetActive(true);
     }
 
-    
+    private void OnBecameInvisible()
+    {
+        Destroy(this.gameObject);
+    }
 }
 
 public enum ModesOfEnemy

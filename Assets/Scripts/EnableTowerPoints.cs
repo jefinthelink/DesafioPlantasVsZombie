@@ -46,7 +46,7 @@ public class EnableTowerPoints : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Tower"))
                     {
-                        Debug.Log("colidiu com um ponto");
+                       
                         points[i].SetActive(false);
                     }
                 }

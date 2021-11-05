@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private ModesOfBullet modes;
+    [SerializeField] private GameObject fire;
+     public ModesOfBullet modes;
     public int id;
     [SerializeField] private Slider lifeBar;
     public int life = 10;
@@ -38,6 +39,7 @@ public class Tower : MonoBehaviour
         lifeBar.minValue = 0;
         lifeBar.value = life;
         lifeBar.gameObject.SetActive(false);
+        fire.SetActive(false);
     }
     private void Update()
     {
@@ -45,7 +47,7 @@ public class Tower : MonoBehaviour
     }
     public void TakeDAmege(int damage)
     {
-        Debug.Log("dando dano na torre " + damage);
+        
         if (damage >= life)
         {
             Death();
@@ -70,11 +72,11 @@ public class Tower : MonoBehaviour
     {
         isFire = true;
         timeFire = timeFireAux;
-        //startar particula de fogo
+        fire.SetActive(true);
     }
     private void endFire()
     {
-    //parar oarticula de fogo
+        fire.SetActive(false);
     }
     private void TakeFire() 
     {

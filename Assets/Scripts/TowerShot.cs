@@ -1,8 +1,10 @@
+using UnityEngine.Audio;
 using UnityEngine;
 
 public class TowerShot : MonoBehaviour
 {
-    [HideInInspector] public ModesOfBullet modes;
+    private AudioSource audioSource;
+     public ModesOfBullet modes;
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform gunBarrel;
     [SerializeField] private float delayShot = 1.0f;
@@ -18,6 +20,9 @@ public class TowerShot : MonoBehaviour
         delayShotAux = delayShot;
         bullet.GetComponent<Bullet>().damage = tower.damage;
         bullet.GetComponent<Bullet>().modes = modes;
+        Debug.Log("modo da torres = " + modes.ToString());
+        Debug.Log("modo da bala = " + bullet.GetComponent<Bullet>().modes);
+        audioSource = transform.GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -39,8 +44,9 @@ public class TowerShot : MonoBehaviour
         if (delayShot <= 0.0f && canBeShot)
         {
             delayShot = delayShotAux;
+            audioSource.Play();
             Instantiate(bullet, gunBarrel.position, bullet.transform.rotation);
-            Debug.Log("instanciando bala");
+           
             
         }
     }
@@ -54,13 +60,7 @@ public class TowerShot : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Enemy")
-    //    {
-    //        canBeShot = false;
-    //    }
-    //}
+
 
 
 }

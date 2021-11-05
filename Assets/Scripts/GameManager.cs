@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] private GameObject gameOverPanel, gameplayPanel;
     public int coins;
 
     private void Awake()
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     public void PauseGame()
     {
@@ -23,9 +24,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+        gameplayPanel.SetActive(false);
+    }
 
     public void NewGame()
     {
+
         SceneManager.LoadScene("GamePlay");
+        unpauseGame();
     }
 }
