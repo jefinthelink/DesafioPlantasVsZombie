@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] private GameObject gameOverPanel, gameplayPanel;
-    public int coins;
 
     private void Awake()
     {
@@ -15,6 +14,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         //DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        Debug.Log("timescale = " + Time.time);
     }
     public void PauseGame()
     {
@@ -29,11 +32,10 @@ public class GameManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         gameplayPanel.SetActive(false);
     }
-
     public void NewGame()
     {
 
-        SceneManager.LoadScene("GamePlay");
         unpauseGame();
+        SceneManager.LoadScene("GamePlay");
     }
 }

@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class MoveTower : MonoBehaviour
 {
+    [Header("tempo para se clicar e mudar de lugar")]
     [SerializeField] private float timeToSetMove = 1.0f;
+    [Header("layer das posições")]
     [SerializeField] private LayerMask layer;
     private float timeToSetMoveAux;
-    public bool getTower = false, setTower = false, clickOnTower = false;
-    public EnableTowerPoints enableTower;
+    private bool getTower = false, setTower = false, clickOnTower = false;
+    private EnableTowerPoints enableTower;
 
     private void Start()
     {
@@ -22,7 +24,6 @@ public class MoveTower : MonoBehaviour
     {
         timeToSetMoveAux = timeToSetMove;
         enableTower = GameObject.FindGameObjectWithTag("Points").GetComponent<EnableTowerPoints>();
-        
     }
     private void GetTower()
     {
@@ -38,7 +39,6 @@ public class MoveTower : MonoBehaviour
             }
         }
     }
-
     private void MovementTower()
     {
         if (getTower)
@@ -56,12 +56,10 @@ public class MoveTower : MonoBehaviour
             }
         }
     }
-
-
     private void OnMouseDown()
     {
         clickOnTower = true;
-        Debug.Log("clicando");
+       
     }
     private void OnMouseUp()
     {

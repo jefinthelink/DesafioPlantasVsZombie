@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class TowerShot : MonoBehaviour
 {
-    private AudioSource audioSource;
-     public ModesOfBullet modes;
+    
+    [HideInInspector] public ModesOfBullet modes;
+    [Header("prefabs")]
     [SerializeField] private GameObject bullet;
+    [Header("cano")]
     [SerializeField] private Transform gunBarrel;
+    [Header("tempos")]
     [SerializeField] private float delayShot = 1.0f;
     private float delayShotAux;
     public bool canBeShot = false;
-    public Tower tower;
     public GameObject enemy;
+    private Tower tower;
+    private AudioSource audioSource;
 
 
     private void Start()
@@ -20,8 +24,6 @@ public class TowerShot : MonoBehaviour
         delayShotAux = delayShot;
         bullet.GetComponent<Bullet>().damage = tower.damage;
         bullet.GetComponent<Bullet>().modes = modes;
-        Debug.Log("modo da torres = " + modes.ToString());
-        Debug.Log("modo da bala = " + bullet.GetComponent<Bullet>().modes);
         audioSource = transform.GetComponent<AudioSource>();
     }
     private void Update()
@@ -37,30 +39,20 @@ public class TowerShot : MonoBehaviour
         }
         Shot();
     }
-
     private void Shot()
     {
-        
         if (delayShot <= 0.0f && canBeShot)
         {
             delayShot = delayShotAux;
             audioSource.Play();
-            Instantiate(bullet, gunBarrel.position, bullet.transform.rotation);
-           
-            
+            Instantiate(bullet, gunBarrel.position, bullet.transform.rotation);  
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
-            // canBeShot = true;
             enemy = other.gameObject;
         }
     }
-
-
-
-
 }

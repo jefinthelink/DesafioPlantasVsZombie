@@ -3,13 +3,11 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 public class Enemy : MonoBehaviour
 {
-     private AudioSource audioSource;
-    [SerializeField] private GameObject fire;
-    [SerializeField] private GameObject ice;
     [Header("tipo de inimigo")]
     [SerializeField] private ModesOfEnemy modes;
-    [Header("valor em moedas")]
-     public int coinValue = 1;
+    [Header("efeitos de particulas")]
+    [SerializeField] private GameObject fire;
+    [SerializeField] private GameObject ice;
     [Header("Vida")]
     [SerializeField] private Slider lifeBar;
     [SerializeField]private int life = 10;
@@ -21,6 +19,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]public bool toBeBite = false;
     [HideInInspector]public Tower towerToBite;
     
+    private AudioSource audioSource;
     private EnemyMoviment enemyMoviment;
     private float enemySpeedWithIce;
     private int maxLife;
@@ -123,7 +122,6 @@ public class Enemy : MonoBehaviour
     }
     private void Death()
     {
-        GameManager.instance.coins += coinValue;
         Destroy(this.gameObject);
     }
     public void SetFire()
@@ -183,14 +181,12 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     private void endIce()
     {
         enemyMoviment.speed = enemyMoviment.speedAux;
         material.color = normalcolor;
         ice.SetActive(true);
     }
-
     private void OnBecameInvisible()
     {
         Destroy(this.gameObject);

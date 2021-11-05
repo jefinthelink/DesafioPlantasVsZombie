@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class NewTower : MonoBehaviour
 {
+    [Header("torres")]
     [SerializeField] private Tower[] towers;
     [SerializeField] private LayerMask layer;
     private EnableTowerPoints enableTower;
@@ -17,7 +18,6 @@ public class NewTower : MonoBehaviour
     {
         enableTower = GameObject.FindGameObjectWithTag("Points").GetComponent<EnableTowerPoints>();
     }
-
     private void Update()
     {
         SetTower();
@@ -37,14 +37,12 @@ public class NewTower : MonoBehaviour
             }
         }
     }
-
     private void SetTower()
     {
         if (newTower)
         {
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("cacatua");
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 1000, layer))
@@ -56,6 +54,4 @@ public class NewTower : MonoBehaviour
             }
         }
     }
-
-   
 }

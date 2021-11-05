@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class EnableTowerPoints : MonoBehaviour
 {
-    
+    [Header("pontos para colocar ou mover as torres")]
     [SerializeField] private GameObject[] points;
-    public bool enablePositions = false;
+    [Header("Layer de obstaculos")]
     [SerializeField] private LayerMask layer;
+    public bool enablePositions = false;
 
     private void Start()
     {
@@ -16,10 +17,7 @@ public class EnableTowerPoints : MonoBehaviour
         if (!value)
             DisablePositions();
            
-        
         enablePositions = value;
-
-
     }
     private void DisablePositions()
     {
@@ -28,12 +26,10 @@ public class EnableTowerPoints : MonoBehaviour
             points[i].gameObject.SetActive(false);
         }
     }
-
     private void Update()
     {
         VerifyPositions();
     }
-
     private void VerifyPositions()
     {
         if (enablePositions)
@@ -44,11 +40,7 @@ public class EnableTowerPoints : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 1, layer))
                 {
-                    if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Tower"))
-                    {
-                       
                         points[i].SetActive(false);
-                    }
                 }
                 else
                 {

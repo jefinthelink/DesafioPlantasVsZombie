@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyMoviment : MonoBehaviour
 {
-    public bool toBeMoviment = true;
-    private Enemy enemy;
+    [HideInInspector]public bool toBeMoviment = true;
     public float speed = 10.0f;
+    private Enemy enemy;
     [HideInInspector]public float speedAux;
     
 
@@ -72,7 +72,6 @@ public class EnemyMoviment : MonoBehaviour
             enemy.towerToBite = null;
             enemy.toBeBite = false;
         }
-
     }
     
 }

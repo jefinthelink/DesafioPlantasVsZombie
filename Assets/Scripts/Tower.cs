@@ -3,16 +3,21 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    [Header("modos")]
+    public ModesOfBullet modes;
+    [Header("efeitos")]
     [SerializeField] private GameObject fire;
-     public ModesOfBullet modes;
-    public int id;
+    [Header("vida")]
     [SerializeField] private Slider lifeBar;
     public int life = 10;
     private int maxLife;
+    [Header("dano")]
     public int damage = 2;
     private bool isFire = false;
     private float delayFire = 1.0f, timeFire = 5.0f, timeFireAux = 5.0f;
+    [Header("outros")]
     [SerializeField] private TowerShot towerShot;
+    public int id;
     private void Awake()
     {
         towerShot.modes = modes;
@@ -31,9 +36,6 @@ public class Tower : MonoBehaviour
     }
     private void SetValues()
     {
-
-
-
         maxLife = life;
         lifeBar.maxValue = maxLife;
         lifeBar.minValue = 0;
@@ -64,8 +66,7 @@ public class Tower : MonoBehaviour
         }
     }
     private void Death()
-    {
-        //colocar efeito de morte
+    {  
         Destroy(this.gameObject);
     }
     public void SetFire()
@@ -102,6 +103,4 @@ public class Tower : MonoBehaviour
         
         }
     }
-    
-
 }

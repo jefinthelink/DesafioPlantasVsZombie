@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("inimigos")]
     [SerializeField] private GameObject[] enemys;
+    [Header("tempo")]
     [SerializeField] private float delayToSpawnEnemy = 2.0f;
     private float delayToSpawnEnemyAux;
 
@@ -10,7 +12,6 @@ public class Spawner : MonoBehaviour
     {
         SetValues();
     }
-
     private void Update()
     {
         delayToSpawnEnemy -= Time.deltaTime;
@@ -20,7 +21,6 @@ public class Spawner : MonoBehaviour
             Spawn();
         }
     }
-
     private void SetValues()
     {
         delayToSpawnEnemyAux = delayToSpawnEnemy;
@@ -30,6 +30,5 @@ public class Spawner : MonoBehaviour
         int index = Random.Range(0, enemys.Length);
         Instantiate(enemys[index],transform.position,enemys[index].transform.rotation);
     }
-
 
 }
